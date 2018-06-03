@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+		<style type="text/css">
+			@keyframes spin{
+				from{ transform:rotate(0deg);/*  0度*/
+				}								/*到*/
+				to{transform: rotate(360deg); /*360度*/
+				}
+			}
+		/*利用边框创建一个矩形的轮廓  阴面:假如整个阴阳为180*180 就将上方的边框设置为90 也就是二分之一阴阳的高度
+		再利用 position: relative;属性将正方形设置成原型 	边框的颜色 宽度 边框线 分开写样式
+		之后利用 :before 与:after 配合content属性来为该元素添加装饰内容。这个虚拟元素默认是###行内元素###;*/
+		
+		.yinyang{ width: 180px;  /*阴阳整体高度*/
+					height: 90px; /*阴阳的高度 另外的还有边框的90 SO*/
+					border-width:90px 1px 1px 1px; /*设置边框宽度 其中90为太极的一部分实体*/
+					border-style:solid ; /*边框样式*/
+					margin-left: auto;
+					margin-right: auto;
+					border-radius: 50%; /*设置圆角 通过这一步就可以得到一个 原型的黑白图案*/
+					position: relative;  /* 他儿子要根据它定位*/
+					
+					animation-name: spin; /* 引用动画*/
+					animation-duration:3s; /*转一圈的时间*/
+					animation-iteration-count: infinite;  /*无限循环*/
+					animation-timing-function: linear;  /*线性循环  匀速*/
+					} 
+		.yinyang:before{ content: "";
+				position: absolute; /*儿子要找爸爸定位了*/
+				border: 40px solid #000; /*阴阳其中一个鱼眼的边框 (左边)*/
+			    width:10px;   /*鱼眼的宽度*/
+			    height:10px;  /*鱼眼高度*/
+				left: 0;      /*向他爸爸看齐*/
+			    border-radius:50%; /*他也要跟他爸爸一样圆角*/
+			    margin-top:-40px; /*在他爸爸心中的位置*/
+				}		
+				/*width+border =一个儿子的大小*/
+				/*下面是个双胞胎*/
+		.yinyang:after{ 
+		    content: "";
+				position: absolute;
+				border: 40px solid #fff;
+				background: #000;  /*二儿子鱼眼的颜色*/
+			    width:10px;
+			    height:10px;
+			    left:90px;   /*根据他爸爸定位 让开兄弟左边的90像素*/
+			    margin-top:-40px;
+			    border-radius:50%;
+		}
+		
+		</style>
+		<body>
+				<div class="yinyang">
+					
+				</div>
+		</body>
+</html>
