@@ -46,7 +46,6 @@
 					let li = document.createElement('li')
 					li.innerText = `${item.name} : ${item.content}`
 					this.messageList.appendChild(li)
-					console.log('11')
 					})
 				})
 			},
@@ -59,8 +58,13 @@
 			saveMessage:function(){
 				let myForm=this.form
 				let content = myForm.querySelector('input[name=content]').value
+				console.log(content)
 				let name = myForm.querySelector('input[name=name]').value
-				this.model.save(name,content).then(function(object) {
+					console.log(name) 	
+					if( name==0 || content==0 ) {
+						alert('姓名与内容都不能为空')
+					} else{
+					this.model.save(name,content).then(function(object) {
 					let li = document.createElement('li')
 					li.innerText = `${object.attributes.name} : ${object.attributes.content}`
 					let messageList = document.querySelector('#messageList')
@@ -68,6 +72,7 @@
 					let content = myForm.querySelector('input[name=content]').value = ''
 					})
 				}
+					}
 			}
 		controller.init(view,model)
 		}.call()
